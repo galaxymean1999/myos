@@ -1,1 +1,8 @@
-rm .bin | nasm -f bin bootloader.asm -o main.bin && qemu-system-x86_64 main.bin
+rm *.bin
+rm *.o
+nasm -f elf32 src/boot.asm -o boot.o
+nasm -f elf32 src/kernel.asm -o kernel.o
+
+ld -m elf_i386 -T linker.ld boot.o kernel.o -o os.bin
+
+qemu-system-x86_64 -hda os.bin
