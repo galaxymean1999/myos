@@ -9,12 +9,12 @@ SECTIONS
         boot.o(.text)
         boot.o(.data)
         boot.o(.rodata)
-        
+
         . = 510;
         SHORT(0xaa55);
     }
 
-    . = 0x8000;
+    . = 0x7e00;
     .kernel :
     {
         kernel.o(.text)

@@ -13,11 +13,11 @@ start:
 
     mov [BOOT_DRIVE], dl
 
-    mov bx, 0x8000
+    mov bx, 0x7e00
     mov al, 1
     call read_disk
 
-    jmp 0x8000
+    jmp 0x7e00
 
     jmp $
 
@@ -26,7 +26,7 @@ read_disk:
     mov ah, 0x02
     mov ch, 0       ; cylinder
     mov dh, 0       ; head
-    mov cl, 0x03    ; sector to start on - 1 is the bootloader
+    mov cl, 0x02    ; sector to start on - 1 is the bootloader
     mov dl, [BOOT_DRIVE]
     int 0x13
     jc error_code   ; if carry bit set (if loading failed)
