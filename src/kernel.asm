@@ -58,21 +58,25 @@ init_pm:
 section .data
 
 gdt_start:
-gdt_null:       ; null descriptor
-    dd 0x0
-    dd 0x0
+gdt_null:           ; null descriptor
+    dd 0
+    dd 0
 
 gdt_code:           ; code segment descriptor
-    dw 0xffff       ; limit (0-15)
-    dw 0x0          ; base (0-15)
-    db 0x0          ; base (16-23)
-    db 10011010b    ; access byte: present, ring 0, code, exec
-    dd 11001111b    ; flags (32 bit mode, 4kb) + limit (16-19)
-    db 0x0          ; base (24-31)
+    dw 0xffff
+    dw 0
+    db 0
+    db 10011010b
+    db 11001111b
+    db 0
 
 gdt_data:           ; data segment descriptor
-    dw 0xffff       ; limit (0-15)
-
+    dw 0xffff
+    dw 0
+    db 0
+    db 10010010b
+    db 11001111b
+    db 0
 gdt_end:
 
 gdt_descriptor:
