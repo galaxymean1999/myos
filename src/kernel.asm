@@ -3,7 +3,6 @@ bits 16
 global kernel
 
 VIDEO_MEMORY equ 0xb8000
-WHITE_ON_BLACK equ 0x0f
 
 section .text
 kernel:
