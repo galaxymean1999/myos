@@ -22,6 +22,9 @@ switch_to_protected_mode:
 
     jmp CODE_SEG:init_pm
 
+;
+; PROTECTED 32 BIT MODE
+;
 bits 32
 init_pm:
     mov ax, DATA_SEG
@@ -36,7 +39,7 @@ init_pm:
 
     call clear_screen
 
-    mov ax, 0x0f00 | '/'
+    mov ax, 0x0f00 | 'A'
     call put_char
 
     jmp $

@@ -14,7 +14,7 @@ start:
     mov [BOOT_DRIVE], dl
 
     mov bx, 0x7e00
-    mov al, 1
+    mov al, 5
     call read_disk
 
     jmp 0x7e00
