@@ -38,8 +38,14 @@ init_pm:
 
     call clear_screen
 
-    mov ax, 0x0f00 | 'A'
+pm_start:
+
+    mov ax, 0x0f00 | '/'
     call put_char
+
+    mov eax, hello_string
+    mov bx, 0x0f00
+    call print_str
 
     jmp $
 
@@ -71,6 +77,26 @@ set_cursor_pos:
     mov [cursor_position_y], ebx
     ret
 
+; eax - char *
+; bh - char color << 8 bits
+print_str:
+    mov ecx, eax
+    mov ax, bx
+print_loop:
+    mov ax, bx
+    mov al, [ecx]
+    cmp al, 0
+    jz print_end
+    push ecx
+    push ebx
+    call put_char
+    pop ebx
+    pop ecx
+    inc ecx
+    jmp print_loop
+print_end:
+    ret
+
 ; ax - char to put on screen at cursor pos
 put_char:
     mov cx, ax
@@ -98,6 +124,8 @@ new_line:
     ret
 
 section .data
+
+hello_string: db "Patrik smrdi jak hovno u cesty", 0
 
 cursor_position_x: dd 0
 cursor_position_y: dd 0

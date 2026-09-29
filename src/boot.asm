@@ -40,16 +40,16 @@ error_code:
     ret
 
 ; bx: pointer to the string
-print_str:              
+print_str_16:              
     mov ah, 0x0e
-print_loop:
+print_loop_16:
     mov al, [bx]
     cmp al, 0
-    je print_end
+    je print_end_16
     int 0x10
     inc bx
-    jmp print_loop
-print_end:
+    jmp print_loop_16
+print_end_16:
     ret
 
 section .data
