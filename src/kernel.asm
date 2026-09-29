@@ -51,23 +51,24 @@ pm_start:
 
 ; screen 80 x 25 chars
 clear_screen:
-    mov eax, 0
-    mov [cursor_position_x], eax
-    mov [cursor_position_y], eax
-    mov ax, 0x0f00 | ' '
-    mov ebx, 0
-clear_screen_loop:
+    push eax
     push ebx
-    call put_char
-    pop ebx
-    add ebx, 2
-    cmp ebx, 80 * 2 * 25
-    je clear_screen_end
-    jmp clear_screen_loop
-clear_screen_end:
+
     mov eax, 0
+    mov ax, 0x0f00 | ' '
+    mov ebx, VIDEO_MEMORY
+clear_screen_loop:
+    mov [ebx], ax
+    add ebx, 2
+    cmp ebx, VIDEO_MEMORY + 80*25*2
+    jne clear_screen_loop
+clear_screen_end:
+    xor eax, eax
     mov ebx, 0
     call set_cursor_pos
+
+    pop ebx
+    pop eax
     ret
 
 ; eax - cursor pos x
@@ -80,6 +81,8 @@ set_cursor_pos:
 ; eax - char *
 ; bh - char color << 8 bits
 print_str:
+    push ecx
+
     mov ecx, eax
     mov ax, bx
 print_loop:
@@ -87,18 +90,26 @@ print_loop:
     mov al, [ecx]
     cmp al, 0
     jz print_end
+
     push ecx
     push ebx
     call put_char
     pop ebx
     pop ecx
+
     inc ecx
     jmp print_loop
 print_end:
+    pop ecx
     ret
 
 ; ax - char to put on screen at cursor pos
 put_char:
+    ; preserve registers that are in use by subroutine
+    push edx
+    push ecx
+    push ebx
+
     mov cx, ax
     mov eax, [cursor_position_x]
     mov ebx, [cursor_position_y]
@@ -111,16 +122,27 @@ put_char:
     mov eax, [cursor_position_x]
     add eax, 2
     cmp eax, 80 * 2
-    je new_line
+    jne put_char_end
+    call new_line
+
+put_char_end:
     mov [cursor_position_x], eax
+
+    pop ebx
+    pop ecx
+    pop edx
     ret
 
 new_line:
+    push eax
+
     mov eax, 0
     mov [cursor_position_x], eax
     mov eax, [cursor_position_y]
     inc eax
     mov [cursor_position_y], eax
+
+    pop eax
     ret
 
 section .data
