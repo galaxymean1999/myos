@@ -2,7 +2,7 @@ bits 32
 
 global kernel
 
-extern c_main
+extern main
 
 section .text
 
@@ -10,7 +10,7 @@ kernel:
     mov ebp, 0x90000
     mov esp, ebp
 
-    call c_main
+    call main
 
     jmp $
 
