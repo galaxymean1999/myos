@@ -2,8 +2,7 @@
 bits 16
 global switch_to_protected_mode
 
-extern main
-extern clear_screen
+extern kernel
 
 section .text
 switch_to_protected_mode:
@@ -32,10 +31,8 @@ init_pm:
     mov ebp, 0x90000
     mov esp, ebp
 
-    call clear_screen
-
 pm_start:
-    jmp main
+    jmp kernel
 
 section .data
 

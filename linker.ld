@@ -19,8 +19,6 @@ SECTIONS
     {
         load_pm.o(.text)
         load_pm.o(.data)
-        load_pm.o(.rodata)
-        load_pm.o(.bss)
     }
 
     .kernel :
@@ -33,5 +31,17 @@ SECTIONS
     {
         screen.o(.text)
         screen.o(.data)
+    }
+
+    .c_main :
+    {
+        mainc.o(.text)
+        mainc.o(.rodata*)
+        mainc.o(.data)
+        mainc.o(.bss)
+        *(.text)
+        *(.rodata*)
+        *(.data)
+        *(.bss*)
     }
 }

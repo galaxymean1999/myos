@@ -1,27 +1,16 @@
 bits 32
 
-global main
+global kernel
 
-extern clear_screen
-extern set_cursor_pos
-extern print_str
-extern put_char
-extern new_line
+extern c_main
 
 section .text
 
-main:
-    mov eax, hello_string
-    mov bx, 0x0f00
-    call print_str
+kernel:
+    mov ebp, 0x90000
+    mov esp, ebp
 
-    mov bx, 4
-    mov ax, 1
-    call set_cursor_pos
-
-    mov ah, 0x0f
-    mov al, '/'
-    call put_char
+    call c_main
 
     jmp $
 
