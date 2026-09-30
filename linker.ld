@@ -15,11 +15,23 @@ SECTIONS
     }
 
     . = 0x7e00;
+    .load_pm :
+    {
+        load_pm.o(.text)
+        load_pm.o(.data)
+        load_pm.o(.rodata)
+        load_pm.o(.bss)
+    }
+
     .kernel :
     {
         kernel.o(.text)
         kernel.o(.data)
-        kernel.o(.rodata)
-        kernel.o(.bss)
+    }
+
+    .screen :
+    {
+        screen.o(.text)
+        screen.o(.data)
     }
 }
