@@ -27,11 +27,11 @@ SECTIONS
         kernel.o(.data)
     }
 
-    .screen :
+    /*.screen :
     {
         screen.o(.text)
         screen.o(.data)
-    }
+    }*/
 
     .c_main :
     {
