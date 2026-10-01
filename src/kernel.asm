@@ -15,5 +15,3 @@ kernel:
     jmp $
 
 section .data
-
-hello_string: db "Patrik smrdi jak hovno u cesty", 0
