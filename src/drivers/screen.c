@@ -62,10 +62,6 @@ void update_cursor_position() {
     set_cursor_position(cursor_x, cursor_y);
 }
 
-static inline void out(u16 port, u8 value) {
-    __asm__ volatile ("out %0, %1" : : "a"(value), "Nd"(port));
-}
-
 int get_cursor_x() {
     return cursor_x;
 }
