@@ -6,7 +6,7 @@ nasm -f elf32 src/kernel.asm -o kernel.o
 gcc -m32 -ffreestanding -fno-pie -fno-stack-protector -fno-asynchronous-unwind-tables -mno-red-zone -c src/main.c -o mainc.o
 gcc -m32 -ffreestanding -fno-pie -fno-stack-protector -fno-asynchronous-unwind-tables -mno-red-zone -c src/drivers/screen.c -o screen.o
 
-ld -m elf_i386 -T linker.ld boot.o load_pm.o kernel.o screen.o mainc.o -o os.bin
+ld -m elf_i386 -N -T linker.ld boot.o load_pm.o kernel.o screen.o mainc.o -o os.bin
 
 qemu-system-x86_64 -display sdl \
 	-m 256M \

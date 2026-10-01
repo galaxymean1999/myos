@@ -2,7 +2,6 @@
 bits 16
 global start
 
-section .text
 start:
     ; clear registers to 0
     xor ax, ax
@@ -14,7 +13,7 @@ start:
     mov [BOOT_DRIVE], dl
 
     mov bx, 0x7e00
-    mov al, 5
+    mov al, 10
     call read_disk
 
     jmp 0x7e00
@@ -39,5 +38,4 @@ error_code:
     int 0x10
     ret
 
-section .data
 BOOT_DRIVE db 0
