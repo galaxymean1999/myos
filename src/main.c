@@ -1,11 +1,31 @@
 #include "drivers/screen.h"
+#include "drivers/keyboard.h"
 
-void main() {
+void print_heading() {
     clear_screen();
 
-    print_str("Hello from C in my own OS!");
-
+    print_str("TinyOS V0");
     new_line();
+    print_str("**********************");
+    new_line();
+}
 
-    print_str("NIGGA");
+void print_prompt() {
+    new_line();
+    print_str("> ");
+}
+
+void main() {
+    print_heading();
+
+    while (true) {
+        char c = 0;
+        if (key_available()) {
+            c = get_key_ascii();
+        }
+
+        if (c != 0) {
+            put_char(get_cursor_x(), get_cursor_y(), c, 0x0f);
+        }
+    }
 }

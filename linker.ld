@@ -34,18 +34,12 @@ SECTIONS
         kernel.o(.data)
     }
 
-    /*.screen : SUBALIGN(1)
-    {
-        screen.o(.text)
-        screen.o(.data)
-    }*/
-
     .c_main : SUBALIGN(1)
     {
-        mainc.o(.text)
-        mainc.o(.rodata*)
-        mainc.o(.data)
-        mainc.o(.bss)
+        main.o(.text)
+        main.o(.rodata*)
+        main.o(.data)
+        main.o(.bss)
         *(.text)
         *(.rodata*)
         *(.data)

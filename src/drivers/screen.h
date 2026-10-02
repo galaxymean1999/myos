@@ -11,8 +11,6 @@
 
 static volatile unsigned short* video_memory = (volatile unsigned short*)0xb8000;
 
-static inline void out(u16 port, u8 value);
-
 void set_cursor_position(u8 x, u8 y);
 
 void update_cursor_position();
