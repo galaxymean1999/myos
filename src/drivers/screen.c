@@ -26,7 +26,7 @@ void put_char(u8 x, u8 y, char c, u8 color) {
 }
 
 void clear_screen() {
-    for (int i = 0; i < TEXT_WIDTH * TEXT_HEIGHT * 2; i++) {
+    for (int i = 0; i < TEXT_WIDTH * TEXT_HEIGHT; i++) {
         video_memory[i] = 0x0f << 8 | ' ';
     }
 
