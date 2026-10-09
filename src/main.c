@@ -20,7 +20,7 @@ void main() {
 	
 	print_prompt();
 
-    while (true) {
+    while (1) {
         char c = 0;
         if (key_available()) {
             c = get_key_ascii();
