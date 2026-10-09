@@ -11,6 +11,10 @@ char get_key_ascii() {
         return 0;
     }
 
+	if (scan_code == 0x1c) {
+		return '\n';
+	}
+
     if (scan_code < sizeof(scan_code_table)) {
         return scan_code_table[scan_code];
     }

@@ -17,14 +17,20 @@ void print_prompt() {
 
 void main() {
     print_heading();
+	
+	print_prompt();
 
     while (true) {
         char c = 0;
         if (key_available()) {
             c = get_key_ascii();
         }
-
-        if (c != 0) {
+		
+		if (c == '\n') {
+			new_line();
+			print_prompt();
+		}
+        else if (c != 0) {
             put_char(get_cursor_x(), get_cursor_y(), c, 0x0f);
         }
     }
