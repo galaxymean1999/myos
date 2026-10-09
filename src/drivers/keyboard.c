@@ -1,6 +1,6 @@
 #include "keyboard.h"
 
-bool key_available() {
+unsigned char key_available() {
     return in(KEYBOARD_STATUS_PORT) & 1;
 }
 

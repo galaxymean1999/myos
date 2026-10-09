@@ -6,14 +6,14 @@
 #define KEYBOARD_DATA_PORT 0x60
 #define KEYBOARD_STATUS_PORT 0x64
 
-const char scan_code_table[] = {
+static const char scan_code_table[] = {
     0,  27, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '\b',
     '\t', 'Q', 'W', 'E', 'R', 'T', 'Z', 'U', 'I', 'O', 'P', '[', ']', '\n',
     0,  'A', 'S', 'D', 'F', 'G', 'H', 'J', 'K', 'L', ';', '\'', '`',   0,
     '\\', 'Y', 'X', 'C', 'V', 'B', 'N', 'M', ',', '.', '/',   0,   '*',   0, ' '
-}
+};
 
-bool key_available();
+unsigned char key_available();
 
 char get_key_ascii();
 
