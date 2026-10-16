@@ -30,6 +30,10 @@ void main() {
 			new_line();
 			print_prompt();
 		}
+		else if (c == '\b') {
+			put_char(get_cursor_x() - 1, get_cursor_y(), ' ', 0x0f);
+			set_cursor_position(get_cursor_x() - 2, get_cursor_y());
+		}
         else if (c != 0) {
             put_char(get_cursor_x(), get_cursor_y(), c, 0x0f);
         }
