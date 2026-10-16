@@ -26,4 +26,6 @@ void clear_screen();
 int get_cursor_x();
 int get_cursor_y();
 
+void scroll_screen(u8 lines);
+
 #endif

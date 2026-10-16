@@ -56,6 +56,12 @@ void new_line() {
     cursor_y++;
 
     update_cursor_position();
+
+	if (cursor_y >= TEXT_HEIGHT) {
+		scroll_screen(1);
+		cursor_y -= 2;
+		update_cursor_position();
+	}
 }
 
 void update_cursor_position() {
@@ -69,3 +75,29 @@ int get_cursor_x() {
 int get_cursor_y() {
     return cursor_y;
 }
+
+void scroll_screen(u8 lines) {
+	u8 current_line = lines + 1;
+
+	for (u8 i = (u8)0; i <= (u8)TEXT_HEIGHT; i++) {
+		for (u8 x = 0; x < (u8)TEXT_WIDTH; x++) {
+			if (current_line < TEXT_HEIGHT) {
+				video_memory[i * TEXT_WIDTH + x] = video_memory[current_line * TEXT_WIDTH + x];
+			}
+			else {
+				video_memory[i * TEXT_WIDTH + x] = 0x0f << 8 | ' ';
+			}
+		}
+
+		current_line++;
+	}  
+}
+
+
+
+
+
+
+
+
+
