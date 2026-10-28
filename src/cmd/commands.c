@@ -16,6 +16,9 @@ void fetch_command(char *buff) {
 
         reboot();
     }
+    else if (str_cmp(buff, "CLEAR")) {
+        clear_screen();
+    }
 
     else {
         new_line();

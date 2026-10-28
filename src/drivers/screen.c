@@ -92,12 +92,3 @@ void scroll_screen(u8 lines) {
 		current_line++;
 	}  
 }
-
-
-
-
-
-
-
-
-
