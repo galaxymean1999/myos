@@ -1,7 +1,7 @@
 #ifndef PORTS_H
 #define PORTS_H
 
-#include "typedefs.h"
+#include "../universal/typedefs.h"
 
 #define out(port, value) \
     __asm__ volatile ("out %0, %1" : : "a"((u8)value), "Nd"((u16)port))

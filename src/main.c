@@ -1,4 +1,5 @@
-#include "drivers/stdio.h"
+#include "universal/stdio.h"
+#include "cmd/commands.h"
 
 extern char _kernel_end[];
 

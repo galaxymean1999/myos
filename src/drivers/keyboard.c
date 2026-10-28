@@ -30,11 +30,11 @@ char get_c() {
     c = get_key_ascii();
 
     if (c == '\n') {
-        new_line();
-        print_str(c_buff);
-        new_line();
+        c_buff[current_c] = 0;
 
-        fetch_command();
+        new_line();
+        fetch_command(c_buff);
+        new_line();
 
         clear_buff();
     }
@@ -43,8 +43,8 @@ char get_c() {
             put_char(get_cursor_x() - 1, get_cursor_y(), ' ', 0x0f);
             set_cursor_position(get_cursor_x() - 2, get_cursor_y());
 
-            c_buff[current_c] = 0;
             current_c--;
+            c_buff[current_c] = 0;
         }
     }
     else if (c != 0) {
