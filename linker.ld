@@ -45,4 +45,6 @@ SECTIONS
         *(.data)
         *(.bss*)
     }
+
+    _kernel_end = .;
 }

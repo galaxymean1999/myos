@@ -2,9 +2,16 @@
 #define KEYBOARD_H
 
 #include "port.h"
+#include "malloc.h"
 
 #define KEYBOARD_DATA_PORT 0x60
 #define KEYBOARD_STATUS_PORT 0x64
+
+static char *c_buff;
+
+static u8 current_c = 0;
+
+static const u8 c_buff_len = 128;
 
 static const char scan_code_table[] = {
     0,  27, '1', '2', '3', '4', '5', '6', '7', '8', '9', '0', '-', '=', '\b',
@@ -16,5 +23,11 @@ static const char scan_code_table[] = {
 unsigned char key_available();
 
 char get_key_ascii();
+
+char get_c();
+
+void init_keyboard();
+
+void clear_buff();
 
 #endif

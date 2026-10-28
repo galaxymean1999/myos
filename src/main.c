@@ -1,5 +1,6 @@
-#include "drivers/screen.h"
-#include "drivers/keyboard.h"
+#include "drivers/stdio.h"
+
+extern char _kernel_end[];
 
 void print_heading() {
     clear_screen();
@@ -15,29 +16,28 @@ void print_prompt() {
     print_str("> ");
 }
 
+void init() {
+    void *kernel_end = (void*)_kernel_end;
+
+    unsigned long aligned_start = ((unsigned long)kernel_end + 4095) & ~4095;
+
+    size_t heap_size = 16 * 1024 * 1024;
+
+    heap_init((void*)aligned_start, heap_size);
+
+    init_keyboard();
+}
+
 void main() {
+    init();
+
     print_heading();
 	
 	print_prompt();
 
     while (1) {
-        char c = 0;
-        if (key_available()) {
-            c = get_key_ascii();
-        }
-		
-		if (c == '\n') {
-			new_line();
-			print_prompt();
-		}
-		else if (c == '\b') {
-			if (get_cursor_x() > 2) {
-				put_char(get_cursor_x() - 1, get_cursor_y(), ' ', 0x0f);
-				set_cursor_position(get_cursor_x() - 2, get_cursor_y());
-			}
-		}
-        else if (c != 0) {
-            put_char(get_cursor_x(), get_cursor_y(), c, 0x0f);
+        if (get_c() == '\n') {
+            print_prompt();
         }
     }
 }
