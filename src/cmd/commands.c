@@ -19,6 +19,12 @@ void fetch_command(char *buff) {
     else if (str_cmp(buff, "CLEAR")) {
         clear_screen();
     }
+    else if (str_cmp(buff, "HELP")) {
+        new_line();
+        print_str("REBOOT - reboots the computer");
+        new_line();
+        print_str("CLEAR - clears the screen");
+    }
 
     else {
         new_line();
